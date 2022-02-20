@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.6.10"
+    id("org.springframework.boot") version "2.6.3"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    kotlin("plugin.spring") version "1.6.10"
 }
 
 group = "com.coderskitchen"
@@ -12,7 +15,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.hibernate.validator:hibernate-validator:7.0.2.Final")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
@@ -23,5 +27,8 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "11"
+    }
 }
