@@ -23,9 +23,11 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    /*
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    */
 }
 
 tasks.test {
