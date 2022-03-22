@@ -105,7 +105,7 @@ internal class UserControllerTest {
             .expectBody()
             .jsonPath("$.violations.length()").isEqualTo(1)
             .jsonPath("$.violations[0].field").isEqualTo("gender")
-            .jsonPath("$.violations[0].message").isEqualTo("Must be one of male, female, various")
+            .jsonPath("$.violations[0].message").isEqualTo("Must be one of [male, female, various]")
     }
 
     @Test
@@ -127,7 +127,7 @@ internal class UserControllerTest {
             .expectBody()
             .jsonPath("$.violations.length()").isEqualTo(1)
             .jsonPath("$.violations[0].field").isEqualTo("gender")
-            .jsonPath("$.violations[0].message").isEqualTo("Must be one of male, female, various")
+            .jsonPath("$.violations[0].message").isEqualTo("Must be one of [male, female, various]")
     }
 
     @Test

@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import javax.validation.Valid
 
-@RequestMapping("/users")
+@RequestMapping("/fb-users")
 @RestController
-class UserController {
+class FBUserController {
     @PostMapping
-    fun addUser(@Valid @RequestBody user:StandardUser) = ResponseEntity.ok("User is valid")
+    fun addUser(@Valid @RequestBody user:FBUser) = ResponseEntity.ok("FB User is valid")
 }

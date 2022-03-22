@@ -12,19 +12,24 @@ import kotlin.reflect.KClass
 @Constraint(validatedBy = [GenderValidator::class])
 @Documented
 annotation class SupportedGender(
-    val message: String = "Must be one of male, female, various",
+    val message: String = "Must be one of {genders}",
 
     val groups: Array<KClass<*>> = [],
-    val payload: Array<KClass<out Payload>> = []
+    val payload: Array<KClass<out Payload>> = [],
+
+    val genders: Array<String>
 )
 
 class GenderValidator : ConstraintValidator<SupportedGender, String?> {
-    companion object {
-        private val GENDERS = listOf("male", "female", "various")
+
+    private var genders: Array<String> = emptyArray()
+
+    override fun initialize(annotation: SupportedGender) {
+        genders = annotation.genders
     }
 
     override fun isValid(value: String?, context: ConstraintValidatorContext): Boolean {
-        return value in GENDERS
+        return value in genders
     }
 
 }
