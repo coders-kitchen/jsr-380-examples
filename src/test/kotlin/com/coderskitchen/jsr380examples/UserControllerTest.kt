@@ -21,7 +21,8 @@ internal class UserControllerTest {
         val request = """
             {
                         "age": 18,
-                        "name": "$name"
+                        "name": "$name",
+                        "gender": "female"
             }
         """.trimMargin()
 
@@ -43,7 +44,8 @@ internal class UserControllerTest {
         val request = """
             {
                         "age": $age,
-                        "name": "test 1234"
+                        "name": "test 1234",
+                        "gender": "male"
             }
         """.trimMargin()
 
@@ -66,7 +68,8 @@ internal class UserControllerTest {
             {
                         "age": 18,
                         "aboutMe": "$aboutMe",
-                        "name": "test 1234"
+                        "name": "test 1234",
+                        "gender": "various"
             }
         """.trimMargin()
 
@@ -88,7 +91,8 @@ internal class UserControllerTest {
             {
                         "age": 18,
                         "aboutMe": "this is from the test",
-                        "name": "test 1234"
+                        "name": "test 1234",
+                        "gender": "various"
             }
         """.trimMargin()
 
