@@ -10,6 +10,6 @@ data class User(
     val name: String?,
     @get:Range(min = 18, max  = 150, message = "Age must be between 18 and 150")
     val age: Int,
-    @get:Size(min=10, max=200, message = "About Me must be between 10 and 200 characters")
-    val aboutMe: String
+    @get:Size(min=0, max=200, message = "About Me must be between 0 and 200 characters")
+    val aboutMe: String?
 )
