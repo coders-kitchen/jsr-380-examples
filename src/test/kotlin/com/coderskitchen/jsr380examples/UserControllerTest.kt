@@ -86,6 +86,51 @@ internal class UserControllerTest {
     }
 
     @Test
+    internal fun `deny a user with an unsupported gender`() {
+        val request = """
+            {
+                        "age": 18,
+                        "aboutMe": "test about",
+                        "name": "test 1234",
+                        "gender": "dolphin"
+            }
+        """.trimMargin()
+
+        webTestClient.post().uri("/users")
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(request)
+            .exchange()
+            .expectStatus()
+            .isBadRequest
+            .expectBody()
+            .jsonPath("$.violations.length()").isEqualTo(1)
+            .jsonPath("$.violations[0].field").isEqualTo("gender")
+            .jsonPath("$.violations[0].message").isEqualTo("Must be one of male, female, various")
+    }
+
+    @Test
+    internal fun `deny a user with a missing gender`() {
+        val request = """
+            {
+                        "age": 18,
+                        "aboutMe": "test about",
+                        "name": "test 1234"
+            }
+        """.trimMargin()
+
+        webTestClient.post().uri("/users")
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(request)
+            .exchange()
+            .expectStatus()
+            .isBadRequest
+            .expectBody()
+            .jsonPath("$.violations.length()").isEqualTo(1)
+            .jsonPath("$.violations[0].field").isEqualTo("gender")
+            .jsonPath("$.violations[0].message").isEqualTo("Must be one of male, female, various")
+    }
+
+    @Test
     internal fun `accept a user fitting the constraints`() {
         val request = """
             {
