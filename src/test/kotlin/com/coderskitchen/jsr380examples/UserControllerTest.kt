@@ -32,11 +32,9 @@ internal class UserControllerTest {
             .expectStatus()
             .isBadRequest
             .expectBody()
-            .consumeWith {
-                val body= String(it.responseBody!!)
-                assertThat(body).isEqualTo("name -> Name must be between 5 and 30 characters")
-
-            }
+            .jsonPath("$.violations.length()").isEqualTo(1)
+            .jsonPath("$.violations[0].field").isEqualTo("name")
+            .jsonPath("$.violations[0].message").isEqualTo("Name must be between 5 and 30 characters")
     }
 
     @ParameterizedTest
@@ -56,11 +54,9 @@ internal class UserControllerTest {
             .expectStatus()
             .isBadRequest
             .expectBody()
-            .consumeWith {
-                val body= String(it.responseBody!!)
-                assertThat(body).isEqualTo("age -> Age must be between 18 and 150")
-
-            }
+            .jsonPath("$.violations.length()").isEqualTo(1)
+            .jsonPath("$.violations[0].field").isEqualTo("age")
+            .jsonPath("$.violations[0].message").isEqualTo("Age must be between 18 and 150")
     }
 
     @Test
@@ -81,11 +77,9 @@ internal class UserControllerTest {
             .expectStatus()
             .isBadRequest
             .expectBody()
-            .consumeWith {
-                val body= String(it.responseBody!!)
-                assertThat(body).isEqualTo("aboutMe -> About Me must be between 0 and 200 characters")
-
-            }
+            .jsonPath("$.violations.length()").isEqualTo(1)
+            .jsonPath("$.violations[0].field").isEqualTo("aboutMe")
+            .jsonPath("$.violations[0].message").isEqualTo("About Me must be between 0 and 200 characters")
     }
 
     @Test
@@ -108,7 +102,6 @@ internal class UserControllerTest {
             .consumeWith {
                 val body= String(it.responseBody!!)
                 assertThat(body).isEqualTo("User is valid")
-
             }
     }
 }
