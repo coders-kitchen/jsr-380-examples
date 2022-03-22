@@ -1,6 +1,8 @@
 package com.coderskitchen.jsr380examples
 
 import org.hibernate.validator.constraints.Range
+import org.hibernate.validator.constraints.URL
+import javax.validation.Valid
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
@@ -11,5 +13,9 @@ data class User(
     @get:Range(min = 18, max  = 150, message = "Age must be between 18 and 150")
     val age: Int,
     @get:Size(min=0, max=200, message = "About Me must be between 0 and 200 characters")
-    val aboutMe: String?
+    val aboutMe: String?,
+    val websites: Map<@Size(min=5, max=10) String, @URL String> = emptyMap(),
+
+    val addresses: Map<@Size(min=5, max=10) String, @Valid Address> = emptyMap()
 )
+
